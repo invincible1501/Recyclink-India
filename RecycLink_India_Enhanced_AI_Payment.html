@@ -1,0 +1,1023 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RecycLink India — Simple Collector Flow</title><style>
+:root{--g:#075f4b;--g2:#0b8064;--mint:#eaf7f2;--blue:#1769aa;--bluebg:#eef6ff;--ink:#102b2a;--muted:#647875;--line:#d9e7e2;--bg:#f5f8f7;--white:#fff;--danger:#b84444;--warn:#9a5c08}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}
+.sidebar{background:#083f35;color:#dff1ec;padding:20px 14px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:10px;align-items:center;font-weight:900;font-size:20px;padding:8px 10px 22px}.logo{width:38px;height:38px;border-radius:11px;background:#fff;color:var(--g);display:grid;place-items:center}
+.user{background:#0d5749;border-radius:15px;padding:13px;margin-bottom:18px}.user small{color:#a9cec5}.user b{display:block;margin-top:4px}
+.navbtn{width:100%;border:0;background:transparent;color:#d9eee9;text-align:left;padding:11px 12px;border-radius:11px;font-weight:750;margin:2px 0}.navbtn:hover,.navbtn.active{background:#0f6655;color:#fff}.navbtn span{display:inline-block;width:25px}
+.sidebar-bottom{position:absolute;bottom:18px;left:14px;right:14px}.status{background:#e8f6ee;color:#08724f;border-radius:10px;padding:9px 10px;font-size:11px;font-weight:800}
+.main{min-width:0}.topbar{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10}.topbar h1{font-size:22px;margin:0}.top-actions{display:flex;gap:8px;align-items:center}.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800}.primary{background:var(--g);color:#fff}.secondary{background:var(--bluebg);color:var(--blue)}.light{background:#fff;border:1px solid var(--line)}.content{padding:24px;max-width:1400px;margin:auto}.view{display:none}.view.active{display:block}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}.kpi small{color:var(--muted);font-weight:700}.kpi strong{display:block;font-size:27px;margin-top:5px}.grid2{display:grid;grid-template-columns:1.08fr .92fr;gap:16px}.box{background:#fff;border:1px solid var(--line);border-radius:17px;padding:20px}.box h2,.box h3{margin-top:0}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:12px;font-weight:850;margin-bottom:6px}.field input,.field select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff}.full{grid-column:1/-1}.photo-capture{border:1.5px dashed #a9cfc3;background:#f7fcfa;border-radius:15px;padding:14px}.camera-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.photo-preview{display:none;margin-top:10px}.photo-preview img{width:100%;max-height:240px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}.capture-status{font-size:12px;color:var(--muted);margin-top:7px}.result{display:none;background:var(--mint);border:1px solid #b8dfd2;border-radius:13px;padding:14px;margin-top:13px;font-size:13px}.result.show{display:block}.confidence{height:8px;background:#e4eeeb;border-radius:10px;overflow:hidden;margin:8px 0}.confidence i{display:block;height:100%;background:var(--g);width:91%}.price{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #edf1ef}.price b{color:var(--g);font-size:18px}.match{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:13px;margin:9px 0}.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:900}.good{background:#e6f6ee;color:#08724f}.warn{background:#fff1dc;color:#985d0b}.danger{background:#fde8e8;color:#a23b3b}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:15px;background:#fff}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid #edf1ef;font-size:13px}th{font-size:11px;color:var(--g);background:#f4f8f6}.qr{width:100px;height:100px;border:8px solid #fff;background:repeating-linear-gradient(45deg,#111 0 4px,#fff 4px 8px);box-shadow:0 0 0 1px #ddd}.timeline{padding-left:23px;position:relative}.timeline:before{content:"";position:absolute;left:5px;top:4px;bottom:4px;width:2px;background:#b8d8cf}.event{position:relative;margin-bottom:17px}.event:before{content:"";position:absolute;left:-23px;top:3px;width:10px;height:10px;background:var(--g);border:3px solid #d7eee8;border-radius:50%}.event b{display:block}.event small{color:var(--muted)}.search{padding:11px 13px;border:1px solid var(--line);border-radius:10px;width:240px}.chart{height:220px;display:flex;align-items:flex-end;gap:12px;padding:15px;border:1px solid var(--line);border-radius:15px;background:#fff}.chartbar{flex:1;background:linear-gradient(to top,var(--g),#8bcfbc);border-radius:7px 7px 0 0;position:relative}.chartbar span{position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}
+.map{height:320px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,#edf7f4,#e8f2fb);position:relative;overflow:hidden}.map:before,.map:after{content:"";position:absolute;background:#fff;border:1px solid #d7e4e1;width:120%;height:30px;left:-10%;top:42%;transform:rotate(-17deg)}.map:after{top:66%;transform:rotate(25deg)}.pin{position:absolute;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--g);color:#fff;z-index:2}.pin.you{background:var(--blue);left:48%;top:47%}.pin.a{left:18%;top:23%}.pin.b{right:20%;top:20%}.pin.c{right:25%;bottom:15%}
+.safety{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.safety .box{text-align:center}.big{font-size:32px}.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:950px){.app{grid-template-columns:75px 1fr}.brand span,.user,.navbtn em,.sidebar-bottom{display:none}.navbtn{text-align:center}.navbtn span{width:auto}.grid2{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.safety{grid-template-columns:1fr 1fr}.admin-grid{grid-template-columns:1fr 1fr}.topbar{padding:0 18px}}
+@media(max-width:600px){.app{display:block}.sidebar{position:fixed;bottom:0;top:auto;height:65px;width:100%;z-index:30;padding:5px;display:flex;justify-content:center}.brand,.user,.sidebar-bottom{display:none}.navbtn{width:auto;padding:9px}.navbtn em{display:none}.navbtn span{font-size:19px}.main{padding-bottom:65px}.topbar{height:60px}.content{padding:15px}.kpis,.form,.safety,.admin-grid{grid-template-columns:1fr}.search{width:150px}.top-actions .light{display:none}}
+
+/* Simple-mode accessibility layer */
+:root{
+  --simple-green:#087a5b;
+  --simple-dark:#12322d;
+  --simple-soft:#f2faf7;
+  --simple-yellow:#fff8df;
+}
+body{font-size:15px}
+.topbar h1{font-size:24px}
+.content{max-width:1180px;padding:22px}
+.box{border-radius:14px;padding:18px}
+.kpi{border-radius:14px;padding:15px}
+.btn{min-height:44px;font-size:14px}
+.voice-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  border:1px solid #b9ddd2;background:#eaf8f3;color:#075f4b;
+  border-radius:10px;padding:9px 12px;font-weight:850;cursor:pointer;
+}
+.voice-btn:hover{background:#dff3ec}
+.voice-btn.speaking{background:#075f4b;color:#fff}
+.step-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-bottom:14px
+}
+.step-number{
+  width:34px;height:34px;border-radius:50%;background:#075f4b;color:#fff;
+  display:inline-grid;place-items:center;font-weight:900;flex:0 0 auto
+}
+.step-title{display:flex;align-items:center;gap:10px}
+.step-title h2,.step-title h3{margin:0}
+.step-guide{
+  background:var(--simple-soft);border:1px solid #cce6dd;border-radius:12px;
+  padding:11px 13px;margin:0 0 14px;display:flex;align-items:center;
+  justify-content:space-between;gap:10px
+}
+.step-guide span{font-weight:700;line-height:1.4}
+.progress{
+  display:flex;gap:6px;margin:0 0 16px
+}
+.progress i{height:6px;flex:1;border-radius:9px;background:#dcebe6}
+.progress i.on{background:#087a5b}
+.simple-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.big-action{width:100%;min-height:52px;font-size:16px}
+.hindi{font-size:13px;color:#5f706d;margin-top:3px}
+.small-note{font-size:12px;color:#647875}
+@media(max-width:600px){
+  .content{padding:12px}
+  .topbar{padding:0 12px}
+  .topbar h1{font-size:18px}
+  .search{display:none}
+  .top-actions .secondary{font-size:13px}
+  .step-head{align-items:flex-start}
+  .step-guide{align-items:flex-start}
+}
+
+
+/* --- Real website / guided-flow layer --- */
+*{box-sizing:border-box}
+body{background:#f6faf8}
+button{font-family:inherit}
+.auth-shell{min-height:100vh;display:none;align-items:center;justify-content:center;padding:24px;background:
+  radial-gradient(circle at 10% 10%,#e4f6ef 0,transparent 32%),
+  radial-gradient(circle at 90% 90%,#eaf3ff 0,transparent 30%),#f7fbf9}
+.auth-shell.show{display:flex}
+.auth-card{width:min(470px,100%);background:#fff;border:1px solid #d8e8e2;border-radius:24px;box-shadow:0 18px 55px rgba(8,63,53,.10);padding:28px}
+.auth-brand{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.auth-logo{width:48px;height:48px;border-radius:14px;background:#075f4b;color:#fff;display:grid;place-items:center;font-size:26px}
+.auth-brand strong{font-size:22px;color:#103d36}
+.auth-brand small{display:block;color:#6a7d79;margin-top:3px}
+.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.lang-card{border:2px solid #dce9e5;background:#fff;border-radius:16px;padding:20px;text-align:left;cursor:pointer}
+.lang-card:hover{border-color:#087a5b;background:#f2faf7}
+.lang-card strong{display:block;font-size:20px}
+.lang-card span{display:block;color:#6b7b78;margin-top:5px}
+.auth-step{display:none}.auth-step.active{display:block}
+.auth-title{font-size:25px;margin:4px 0 7px;color:#143a35}
+.auth-sub{color:#647875;line-height:1.5;margin-bottom:20px}
+.phone-row{display:flex;gap:8px}
+.country-code{width:76px;padding:13px;border:1px solid #d6e4df;border-radius:11px;background:#f7faf9;font-weight:800}
+.auth-input{width:100%;padding:14px;border:1px solid #d6e4df;border-radius:11px;font-size:17px;outline:none}
+.auth-input:focus{border-color:#087a5b;box-shadow:0 0 0 3px #e5f5ef}
+.otp-row{display:flex;gap:9px;margin:18px 0}.otp-row input{width:48px;height:54px;text-align:center;font-size:22px;font-weight:900;border:1px solid #d6e4df;border-radius:10px}
+.auth-actions{margin-top:18px}.auth-actions .btn{width:100%;min-height:50px}
+.demo-hint{background:#fff8df;border:1px solid #eadba8;border-radius:10px;padding:10px 12px;font-size:12px;color:#725c1a;margin-top:12px}
+.auth-voice{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#eff9f5;border:1px solid #cfe7de;border-radius:12px;padding:10px 12px;margin:16px 0}
+.app-shell{display:none}.app-shell.show{display:grid}
+.flow-banner{background:#075f4b;color:#fff;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.flow-banner strong{font-size:15px}.flow-banner small{opacity:.85;display:block;margin-top:3px}
+.logout-btn{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:9px;padding:8px 11px;font-weight:800}
+.step-view{display:none}.step-view.active{display:block}
+.flow-card{max-width:760px;margin:0 auto;background:#fff;border:1px solid #d9e7e2;border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(16,43,42,.05)}
+.flow-progress{display:flex;gap:5px;margin-bottom:20px}.flow-progress i{height:5px;flex:1;background:#deebe7;border-radius:9px}.flow-progress i.done{background:#087a5b}
+.flow-question{font-size:25px;font-weight:900;margin:4px 0;color:#163c36}
+.flow-sub{color:#657874;margin:0 0 18px;line-height:1.5}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.choice-card{padding:18px;border:1.5px solid #d7e6e1;border-radius:14px;background:#fff;text-align:left;cursor:pointer;min-height:100px}
+.choice-card:hover{border-color:#087a5b;background:#f2faf7}.choice-card strong{display:block;font-size:16px}.choice-card span{display:block;color:#687a76;font-size:12px;margin-top:5px}
+.flow-footer{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.flow-footer .btn{min-height:48px}.voice-strip{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;background:#eff9f5;border:1px solid #cee7de;border-radius:12px;margin-bottom:18px}
+.toast{position:fixed;right:20px;bottom:20px;background:#163c36;color:#fff;padding:13px 16px;border-radius:12px;box-shadow:0 12px 35px rgba(0,0,0,.18);z-index:100;display:none;max-width:360px}.toast.show{display:block}
+.welcome-name{font-size:15px;color:#647875}.simple-home{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.home-primary{background:linear-gradient(135deg,#075f4b,#0b8064);color:#fff;border-radius:18px;padding:24px}.home-primary h2{font-size:28px;margin:0 0 7px}.home-primary p{opacity:.9;line-height:1.5}.home-primary .btn{background:#fff;color:#075f4b;width:100%;margin-top:12px}.next-step{border:1px solid #d9e7e2;background:#fff;border-radius:16px;padding:18px}.next-step .big-action{margin-top:12px}
+@media(max-width:700px){.auth-card{padding:21px}.choice-grid,.simple-home{grid-template-columns:1fr}.flow-card{padding:18px}.flow-banner{padding:12px 15px}.otp-row input{width:42px}}
+
+.app-shell > aside,.app-shell > main{display:none!important}
+
+.step-view{opacity:1;transform:none}
+.step-view.active{animation:flowIn .12s ease-out}
+@keyframes flowIn{from{opacity:.65;transform:translateY(2px)}to{opacity:1;transform:none}}
+</style>
+<style>
+.ai-panel{margin-top:18px;border:1px solid #cfe5dd;background:#f6fbf9;border-radius:16px;padding:16px}
+.ai-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ai-score{font-size:26px;font-weight:900;color:#075f4b}
+.ai-meter{height:9px;background:#dfece8;border-radius:99px;overflow:hidden;margin:9px 0}
+.ai-meter i{display:block;height:100%;background:#087a5b}
+.ai-feasibility{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.ai-chip{border-radius:11px;padding:10px;background:#fff;border:1px solid #d9e7e2}
+.ai-chip b{display:block}.ai-chip span{font-size:12px;color:#667874}
+.payment-card{background:linear-gradient(135deg,#063f35,#0b8064);color:#fff;border-radius:18px;padding:20px}
+.payment-total{font-size:34px;font-weight:950;margin:5px 0 14px}
+.payment-line{display:flex;justify-content:space-between;gap:15px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.16)}
+.payment-line:last-child{border-bottom:0}
+.payment-status{display:inline-flex;align-items:center;gap:7px;background:#e9f8f0;color:#08724f;border-radius:99px;padding:7px 11px;font-weight:900;font-size:12px}
+.pay-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}
+.pay-method{border:1px solid #d9e7e2;border-radius:12px;padding:12px;background:#fff;cursor:pointer;text-align:center;font-weight:850}
+.pay-method.active{border:2px solid #087a5b;background:#effaf6}
+.txn-box{background:#f5f8f7;border-radius:12px;padding:12px;margin-top:13px}
+@media(max-width:650px){.ai-feasibility,.pay-methods{grid-template-columns:1fr}}
+</style>
+</head><body>
+<div class="auth-shell show" id="authShell">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="auth-logo">♻</div>
+      <div><strong>RecycLink India</strong><small id="authBrandSub">ई-वेस्ट collection made simple</small></div>
+    </div>
+
+    <div class="auth-step active" id="langStep">
+      <h1 class="auth-title">Choose your language</h1>
+      <p class="auth-sub">पहले भाषा चुनें / पहले अपनी भाषा चुनें। You can change it later.</p>
+      <div class="lang-grid">
+        <button class="lang-card" onclick="selectLanguage('hi')"><strong>हिन्दी</strong><span>आवाज़ और स्क्रीन हिन्दी में</span></button>
+        <button class="lang-card" onclick="selectLanguage('en')"><strong>English</strong><span>Voice and screen in English</span></button>
+      </div>
+      <div class="auth-voice"><span id="langVoiceText">भाषा चुनने के बाद हम आपको हर कदम आवाज़ में बताएंगे।</span><button class="voice-btn" onclick="speak('भाषा चुनें। हिन्दी या English में से एक चुनें।')">🔊 सुनें</button></div>
+    </div>
+
+    <div class="auth-step" id="phoneStep">
+      <h1 class="auth-title" id="phoneTitle">मोबाइल नंबर डालें</h1>
+      <p class="auth-sub" id="phoneSub">सिर्फ मोबाइल नंबर चाहिए। कोई लंबा form नहीं।</p>
+      <div class="auth-voice"><span id="phoneVoiceText">अपना मोबाइल नंबर डालें। फिर OTP भेजें।</span><button class="voice-btn" onclick="speakCurrentAuth()">🔊 सुनें</button></div>
+      <div class="phone-row"><div class="country-code">+91</div><input id="phoneNumber" class="auth-input" inputmode="numeric" maxlength="10" placeholder="10 digit mobile number"></div>
+      <div class="auth-actions"><button class="btn primary" onclick="sendOTP()">OTP भेजें</button></div>
+      <div class="demo-hint" id="otpHint">Prototype demo: OTP verification uses <b>123456</b>.</div>
+    </div>
+
+    <div class="auth-step" id="otpStep">
+      <h1 class="auth-title" id="otpTitle">OTP डालें</h1>
+      <p class="auth-sub" id="otpSub">आपके मोबाइल पर भेजे गए 6 अंकों का OTP डालें।</p>
+      <div class="auth-voice"><span id="otpVoiceText">OTP के छह अंक डालें।</span><button class="voice-btn" onclick="speakCurrentAuth()">🔊 सुनें</button></div>
+      <div class="otp-row">
+        <input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric">
+        <input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric">
+      </div>
+      <div class="auth-actions"><button class="btn primary" onclick="verifyOTP()">✓ Verify OTP</button></div>
+      <div class="demo-hint">Prototype demo OTP: <b>123456</b></div>
+    </div>
+
+    <div class="auth-step" id="profileStep">
+      <h1 class="auth-title" id="profileTitle">आपका नाम</h1>
+      <p class="auth-sub" id="profileSub">बस अपना नाम डालें ताकि Lot और payment records आपके नाम से दिखें।</p>
+      <div class="auth-voice"><span id="profileVoiceText">अपना नाम डालें।</span><button class="voice-btn" onclick="speakCurrentAuth()">🔊 सुनें</button></div>
+      <input id="collectorName" class="auth-input" placeholder="आपका नाम / Your name">
+      <div class="auth-actions"><button class="btn primary" onclick="finishRegistration()">✓ शुरू करें</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="app-shell" id="appShell">
+<div class="flow-banner" id="flowBanner">
+  <div><strong id="flowWelcome">RecycLink India</strong><small id="flowHint">Step-by-step सहायता</small></div>
+  <div style="display:flex;gap:8px;align-items:center"><button class="voice-btn" onclick="speakCurrentStep()">🔊 <span id="listenLabel">सुनें</span></button><button class="logout-btn" onclick="logout()">Log out</button></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="step-view active" id="flowHome">
+  <div class="content">
+    <div class="simple-home">
+      <div class="home-primary">
+        <div class="welcome-name" id="homeGreeting">नमस्ते</div>
+        <h2 id="homeTitle">आज क्या करना है?</h2>
+        <p id="homeSub">हम आपको एक-एक कदम करके पूरा काम करवाएंगे।</p>
+        <button class="btn" onclick="goFlow(1)">📷 नया E-Waste Lot बनाएं</button>
+      </div>
+      <div class="next-step">
+        <div class="small-note">आपका अगला कदम</div>
+        <h3 id="nextTitle">1. E-Waste की फोटो लें</h3>
+        <p id="nextSub">फोटो, प्रकार और वजन भरें।</p>
+        <button class="btn secondary big-action" onclick="goFlow(1)" id="nextBtn">शुरू करें →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="step-view" id="flowStep1">
+  <div class="content"><div class="flow-card">
+    <div class="flow-progress"><i class="done"></i><i></i><i></i><i></i><i></i></div>
+    <div class="voice-strip"><span>🔊 <b>Step 1</b> — E-Waste की जानकारी</span><button class="voice-btn" onclick="speak('पहला कदम। ई-वेस्ट की साफ फोटो लें, उसका प्रकार चुनें और वजन डालें। फिर आगे बढ़ें।')">सुनें</button></div>
+    <h2 class="flow-question">ई-वेस्ट की फोटो लें</h2><p class="flow-sub">पहले फोटो, फिर प्रकार और वजन। बस इतना ही।</p>
+    <button class="btn primary big-action" onclick="document.getElementById('photoInput').click()">📷 फोटो लें</button>
+    <div id="flowPhotoStatus" class="small-note" style="margin-top:8px">अभी फोटो नहीं है</div>
+    <div style="margin-top:18px">
+      <label class="small-note">ई-वेस्ट का प्रकार</label>
+      <select id="flowCat" class="auth-input" style="margin-top:6px"><option>Printed Circuit Board</option><option>Copper Cable</option><option>Mobile Phone</option><option>Computer / Laptop</option><option>Mixed E-Waste</option></select>
+    </div>
+    <div style="margin-top:14px"><label class="small-note">वजन (kg)</label><input id="flowWt" class="auth-input" type="number" value="5" min="0" step=".1" style="margin-top:6px"></div>
+    <div class="flow-footer"><button class="btn light" onclick="goFlow(0)">← वापस</button><button class="btn primary" onclick="completeStep1()">आगे →</button></div>
+  </div></div>
+</div>
+
+<div class="step-view" id="flowStep2">
+  <div class="content"><div class="flow-card">
+    <div class="flow-progress"><i class="done"></i><i class="done"></i><i></i><i></i><i></i></div>
+    <div class="voice-strip"><span>🔊 <b>Step 2</b> — AI check + Price</span><button class="voice-btn" onclick="voiceGuide('दूसरा कदम। फोटो के आधार पर AI ई-वेस्ट का प्रकार पहचानने की कोशिश करेगा। फिर अनुमानित भाव दिखेगा।','Step two. AI will use the photo to estimate the e-waste type, then show an estimated price.')">सुनें</button></div>
+    <h2 class="flow-question">AI से फोटो जांचें</h2>
+    <p class="flow-sub">यह एक simple AI-assisted estimate है। कम confidence होने पर आप category बदल सकते हैं।</p>
+    <button class="btn primary big-action" onclick="analyzePhotoAI()">🧠 फोटो Analyze करें</button>
+    <div id="aiResult" class="result"></div>
+    <div class="box" style="margin:14px 0 0">
+      <div class="price"><span id="flowPriceMaterial">Material</span><b id="flowPrice">₹—/kg</b></div>
+      <div class="small-note" style="margin-top:8px">Estimated price • Final payment depends on actual weight and recycler settlement.</div>
+    </div>
+    <div class="flow-footer"><button class="btn light" onclick="goFlow(1)">← वापस</button><button class="btn primary" onclick="goFlow(3)">Recycler चुनें →</button></div>
+  </div></div>
+</div>
+
+<div class="step-view" id="flowStep3">
+  <div class="content"><div class="flow-card">
+    <div class="flow-progress"><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i></div>
+    <div class="voice-strip"><span>🔊 <b>Step 3</b> — Recycler चुनें</span><button class="voice-btn" onclick="speak('तीसरा कदम। पास के Verified Recycler में से एक चुनें।')">सुनें</button></div>
+    <h2 class="flow-question">कौन सा Recycler चुनना है?</h2><p class="flow-sub">हमने विकल्प सरल रखे हैं: दूरी और भाव देखें।</p>
+    <div id="flowRecyclerChoices">
+      <button class="choice-card" style="width:100%;margin-bottom:10px" onclick="selectFlowRecycler('GreenCycle Recycling',205)"><strong>GreenCycle Recycling</strong><span>8.4 km • Verified • ₹205/kg</span></button>
+      <button class="choice-card" style="width:100%;margin-bottom:10px" onclick="selectFlowRecycler('EcoMetals Processing',198)"><strong>EcoMetals Processing</strong><span>13.2 km • Verified • ₹198/kg</span></button>
+      <button class="choice-card" style="width:100%" onclick="selectFlowRecycler('Urban E-Cycle',190)"><strong>Urban E-Cycle</strong><span>17.6 km • Mixed E-Waste • ₹190/kg</span></button>
+    </div>
+    <div id="flowRecyclerSelected" class="result"></div>
+    <div class="flow-footer"><button class="btn light" onclick="goFlow(2)">← वापस</button><button class="btn primary" id="flowRecyclerNext" disabled onclick="goFlow(4)">Handover →</button></div>
+  </div></div>
+</div>
+
+<div class="step-view" id="flowStep4">
+  <div class="content"><div class="flow-card">
+    <div class="flow-progress"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i></div>
+    <div class="voice-strip"><span>🔊 <b>Step 4</b> — Handover + Payment</span><button class="voice-btn" onclick="voiceGuide('चौथा कदम। QR दिखाकर ई-वेस्ट जमा करें। वजन confirm होने के बाद payment method चुनें।','Step four. Show the QR and hand over the e-waste. After the weight is confirmed, choose the payment method.')">सुनें</button></div>
+    <h2 class="flow-question">Handover और Payment</h2>
+    <p class="flow-sub">पहले Lot verify करें। फिर payment का तरीका चुनें।</p>
+    <div style="display:flex;align-items:center;gap:18px;padding:18px;border:1px solid #d9e7e2;border-radius:14px">
+      <div class="qr"></div><div><b id="flowLotId">LOT-RCI-260929-00421</b><br><small id="flowLotMaterial">PCB</small><br><span class="badge good">Valid Lot</span></div>
+    </div>
+    <button class="btn primary big-action" style="margin-top:16px" onclick="verifyFlowHandover()">✓ Verify Handover</button>
+    <div id="flowHandoverResult" class="result"></div>
+
+    <div id="paymentArea" style="display:none;margin-top:16px">
+      <div class="payment-card">
+        <div style="opacity:.85;font-size:12px">FINAL SETTLEMENT</div>
+        <div class="payment-total">₹984</div>
+        <div class="payment-line"><span>Final weight</span><b>4.8 kg</b></div>
+        <div class="payment-line"><span>Recycler rate</span><b>₹205/kg</b></div>
+        <div class="payment-line"><span>Adjustment</span><b>₹0</b></div>
+      </div>
+      <div style="margin-top:14px"><b>Payment method</b>
+        <div class="pay-methods">
+          <button class="pay-method active" onclick="selectPayment(this,'UPI')">📱 UPI<br><small>Fast</small></button>
+          <button class="pay-method" onclick="selectPayment(this,'Bank')">🏦 Bank<br><small>Direct</small></button>
+          <button class="pay-method" onclick="selectPayment(this,'Cash')">💵 Cash<br><small>On handover</small></button>
+        </div>
+      </div>
+      <div class="txn-box"><span class="payment-status">● Payment ready</span>
+        <div style="margin-top:8px"><b id="paymentMethodText">UPI</b> selected</div>
+        <div class="small-note">Transaction ID: <b>RCI26092998421</b></div>
+      </div>
+      <button class="btn primary big-action" style="margin-top:13px" onclick="confirmPayment()">✓ Confirm Payment</button>
+      <div id="paymentDone" class="result"></div>
+    </div>
+
+    <div class="flow-footer"><button class="btn light" onclick="goFlow(3)">← वापस</button><button class="btn primary" id="flowPassportBtn" disabled onclick="goFlow(5)">रिकॉर्ड देखें →</button></div>
+  </div></div>
+</div>
+
+<div class="step-view" id="flowStep5">
+  <div class="content"><div class="flow-card">
+    <div class="flow-progress"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i></div>
+    <div class="voice-strip"><span>🔊 <b>Step 5</b> — आपका रिकॉर्ड</span><button class="voice-btn" onclick="speak('पांचवां कदम। आपका Digital E-Waste Passport तैयार है। इसमें Lot, वजन, value और payment status है।')">सुनें</button></div>
+    <h2 class="flow-question">काम पूरा हुआ ✓</h2><p class="flow-sub">आपका Digital E-Waste Passport यहां है।</p>
+    <div class="box" style="margin:0"><div class="price"><span>Lot</span><b id="finalLot">LOT-RCI-260929-00421</b></div><div class="price"><span>Final Weight</span><b>4.8 kg</b></div><div class="price"><span>Final Value</span><b>₹984</b></div><div class="price"><span>Payment</span><span class="badge good">Confirmed</span></div></div>
+    <button class="btn primary big-action" style="margin-top:16px" onclick="speak('आपका payment confirmed है। आपका digital record सुरक्षित है।')">🔊 Payment की जानकारी सुनें</button>
+    <div class="flow-footer"><button class="btn light" onclick="goFlow(0)">⌂ शुरुआत</button><button class="btn secondary" onclick="goFlow(1)">＋ नया Lot</button></div>
+  </div></div>
+</div>
+
+<aside class="sidebar">
+  <div class="brand"><div class="logo">♻</div><span>RecycLink</span></div>
+  <div class="user"><small>COLLECTOR</small><b>Demo Collector</b></div>
+  <button class="navbtn active" onclick="show('home',this)"><span>⌂</span><em>Home / शुरुआत</em></button>
+  <button class="navbtn" onclick="show('collector',this)"><span>＋</span><em>1. Lot बनाएं</em></button>
+  <button class="navbtn" onclick="show('prices',this)"><span>₹</span><em>2. भाव देखें</em></button>
+  <button class="navbtn" onclick="show('recyclers',this)"><span>♻</span><em>3. Recycler चुनें</em></button>
+  <button class="navbtn" onclick="show('handover',this)"><span>▣</span><em>4. जमा करें</em></button>
+  <button class="navbtn" onclick="show('passport',this)"><span>▤</span><em>5. रिकॉर्ड</em></button>
+  <button class="navbtn" onclick="show('ledger',this)"><span>₹</span><em>कमाई</em></button>
+  <button class="navbtn" onclick="show('safety',this)"><span>!</span><em>सुरक्षा</em></button>
+  <button class="navbtn" onclick="show('analytics',this)"><span>◒</span><em>रिपोर्ट</em></button>
+  <button class="navbtn" onclick="show('admin',this)"><span>⚙</span><em>Admin</em></button>
+  <div class="sidebar-bottom"><div class="status">● Online • 2 pending sync</div></div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <h1 id="pageTitle">Dashboard</h1>
+  <div class="top-actions"><span id="voiceStatus" class="small-note">🟡 Checking Hindi voice…</span><button class="voice-btn" id="globalVoice" onclick="speakCurrentStep()">🔊 सुनें</button><button class="voice-btn" onclick="stopVoice()">⏹ रोकें</button><button class="btn secondary" onclick="show('collector')">＋ नया Lot</button></div>
+</header>
+
+<div class="content">
+
+<section class="view active" id="home">
+  <div class="step-guide">
+    <span>👋 नमस्ते! RecycLink में आपका स्वागत है। पहले ई-वेस्ट की फोटो लें और Lot बनाएं।</span>
+    <button class="voice-btn" onclick="speak('नमस्ते! सबसे पहले ई-वेस्ट की फोटो लें और नया Lot बनाएं। फिर भाव देखें, Recycler चुनें और QR से handover करें।')">🔊 सुनें</button>
+  </div>
+  <div class="progress"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  <div class="kpis">
+    <div class="kpi"><small>आज के Lots</small><strong>24</strong></div>
+    <div class="kpi"><small>इस महीने की कमाई</small><strong>₹18,640</strong></div>
+    <div class="kpi"><small>कुल E-Waste</small><strong>86.4 kg</strong></div>
+    <div class="kpi"><small>Sync बाकी</small><strong>02</strong></div>
+  </div>
+  <div class="box">
+    <div class="step-head"><div class="step-title"><span class="step-number">1</span><div><h2>ई-वेस्ट Lot बनाएं</h2><div class="hindi">फोटो + वजन भरें</div></div></div>
+      <button class="voice-btn" onclick="speak('पहला कदम। ई-वेस्ट की फोटो लें, उसका प्रकार और वजन भरें। फिर Analyze दबाएं।')">🔊 सुनें</button>
+    </div>
+    <button class="btn primary big-action" onclick="show('collector')">📷 नया Lot बनाएं</button>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="box">
+      <div class="step-head"><div class="step-title"><span class="step-number">2</span><div><h3>भाव देखें</h3><div class="hindi">आज का अनुमानित रेट</div></div></div>
+      <button class="voice-btn" onclick="speak('दूसरा कदम। अपने ई-वेस्ट का आज का अनुमानित भाव देखें।')">🔊</button></div>
+      <button class="btn secondary big-action" onclick="show('prices')">₹ भाव देखें</button>
+    </div>
+    <div class="box">
+      <div class="step-head"><div class="step-title"><span class="step-number">3</span><div><h3>Recycler चुनें</h3><div class="hindi">Verified Recycler</div></div></div>
+      <button class="voice-btn" onclick="speak('तीसरा कदम। पास का Verified Recycler चुनें।')">🔊</button></div>
+      <button class="btn light big-action" onclick="show('recyclers')">♻ Recycler देखें</button>
+    </div>
+  </div>
+  <div class="box" style="margin-top:14px">
+    <div class="step-head"><div class="step-title"><span class="step-number">4</span><div><h3>QR से Handover</h3><div class="hindi">जमा करें और payment देखें</div></div></div>
+      <button class="voice-btn" onclick="speak('चौथा कदम। QR दिखाकर ई-वेस्ट जमा करें। Handover verify होने के बाद payment confirm होगा।')">🔊 सुनें</button></div>
+    <button class="btn primary big-action" onclick="show('handover')">▣ Handover शुरू करें</button>
+  </div>
+</section>
+
+<section class="view" id="collector">
+  <div class="step-head">
+    <div class="step-title"><span class="step-number">1</span><div><h2>ई-वेस्ट Lot बनाएं</h2><div class="hindi">केवल जरूरी जानकारी भरें</div></div></div>
+    <button class="voice-btn" onclick="speak('पहला कदम। फोटो लें। फिर ई-वेस्ट का प्रकार और वजन भरें। Analyze and Estimate दबाएं।')">🔊 सुनें</button>
+  </div>
+  <div class="progress"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  <div class="grid2">
+    <div class="box">
+      <div class="step-guide"><span>📷 पहले फोटो लें</span><button class="voice-btn" onclick="speak('पहले ई-वेस्ट की साफ फोटो लें।')">🔊</button></div>
+      <div class="form">
+        <div class="field"><label>ई-वेस्ट का प्रकार</label><select id="cat"><option>Printed Circuit Board</option><option>Copper Cable</option><option>Mobile Phone</option><option>Computer / Laptop</option><option>Mixed E-Waste</option></select></div>
+        <div class="field"><label>वजन (kg)</label><input id="wt" type="number" min="0" step=".1" value="5"></div>
+        <div class="field full">
+          <label>ई-वेस्ट फोटो</label>
+          <div class="photo-capture">
+            <input id="photoInput" type="file" accept="image/*" capture="environment" style="display:none" onchange="previewPhoto(event)">
+            <div class="camera-actions">
+              <button type="button" class="btn primary big-action" onclick="document.getElementById('photoInput').click()">📷 फोटो लें</button>
+              <button type="button" class="btn light" onclick="removePhoto()">फोटो हटाएं</button>
+            </div>
+            <div id="photoPreview" class="photo-preview"><img id="photoImage" alt="E-waste preview"></div>
+            <div id="captureStatus" class="capture-status">अभी फोटो नहीं है</div>
+          </div>
+        </div>
+        <div class="full"><button class="btn primary big-action" onclick="estimate()">✓ Analyze & Estimate</button></div>
+      </div>
+      <div id="estimate" class="result"></div>
+    </div>
+    <div class="box">
+      <div class="step-head"><div><h3>AI Classification</h3><div class="hindi">AI प्रकार पहचानता है</div></div><button class="voice-btn" onclick="speak('AI फोटो और चुनी गई जानकारी के आधार पर ई-वेस्ट का प्रकार बताता है। आप चाहें तो इसे बदल सकते हैं।')">🔊</button></div>
+      <div style="font-size:38px">🧠</div>
+      <select id="aiCategory" style="width:100%;margin:7px 0 10px;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff" onchange="changeAIClassification()">
+        <option>Printed Circuit Board</option><option>Copper Cable</option><option>Mobile Phone</option><option>Computer / Laptop</option><option>Mixed E-Waste</option>
+      </select>
+      <small id="classificationMode">AI prediction • 91% confidence</small>
+      <div class="confidence"><i id="confidenceBar"></i></div>
+      <small id="confidenceText">91% confidence</small>
+      <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+      <span id="classificationBadge" class="badge good">AI Detected</span>
+      <div style="margin-top:18px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn primary big-action" onclick="confirmAIClassification()">✓ यही प्रकार रखें</button>
+        <button class="btn light" onclick="resetAIClassification()">Reset</button>
+      </div>
+      <div id="classificationResult" class="result"></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="prices">
+  <div class="step-guide"><span>यहां आज के अनुमानित भाव देखें।</span><button class="voice-btn" onclick="speak('यहां अलग-अलग ई-वेस्ट के आज के अनुमानित भाव दिए हैं। अपने Lot के प्रकार का भाव देखें।')">🔊 सुनें</button></div>
+  <div class="box">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3>Price Board</h3><span class="badge good">Updated today</span></div>
+    <div class="price"><span>Printed Circuit Board</span><b>₹180–220/kg</b></div>
+    <div class="price"><span>Copper Cable</span><b>₹430–520/kg</b></div>
+    <div class="price"><span>Mixed E-Waste</span><b>₹65–95/kg</b></div>
+    <div class="price"><span>Computer / Laptop</span><b>₹70–110/kg</b></div>
+    <div class="price"><span>Mobile Phone Scrap</span><b>₹280–360/kg</b></div>
+  </div>
+</section>
+
+<section class="view" id="recyclers">
+  <div class="step-guide"><span>Verified Recycler चुनें। पास वाला विकल्प देखें।</span><button class="voice-btn" onclick="speak('यहां Verified Recycler दिखाई देंगे। दूरी और भाव देखकर एक Recycler चुनें।')">🔊 सुनें</button></div>
+  <div class="grid2">
+    <div class="map">
+      <div class="pin a">♻</div><div class="pin b">♻</div><div class="pin c">♻</div><div class="pin you">●</div>
+    </div>
+    <div class="box">
+      <h3>Verified Recyclers</h3>
+      <div class="match"><div><b>GreenCycle Recycling</b><br><small>8.4 km • PCB • Verified</small><br><span class="badge good">₹205/kg</span></div><button class="btn primary" onclick="choose('GreenCycle Recycling')">Select</button></div>
+      <div class="match"><div><b>EcoMetals Processing</b><br><small>13.2 km • PCB • Verified</small><br><span class="badge good">₹198/kg</span></div><button class="btn secondary" onclick="choose('EcoMetals Processing')">Select</button></div>
+      <div class="match"><div><b>Urban E-Cycle</b><br><small>17.6 km • Mixed E-Waste</small><br><span class="badge good">₹190/kg</span></div><button class="btn light" onclick="choose('Urban E-Cycle')">View</button></div>
+      <div id="choose" class="result"></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="handover">
+  <div class="step-guide"><span>QR दिखाएं → Handover verify करें → Payment देखें।</span><button class="voice-btn" onclick="speak('QR दिखाएं। Verify Handover दबाएं। Handover सफल होने के बाद payment की जानकारी देखें।')">🔊 सुनें</button></div>
+  <div class="grid2">
+    <div class="box">
+      <h3>QR Handover</h3>
+      <div style="display:flex;align-items:center;gap:20px;margin:18px 0"><div class="qr"></div><div><b>LOT-RCI-260929-00421</b><br><small>Printed Circuit Board</small><br><span class="badge good">Valid Lot</span></div></div>
+      <button class="btn primary" onclick="verifyHandover()">✓ Verify Handover</button>
+      <div id="handoverResult" class="result"></div>
+    </div>
+    <div class="box">
+      <h3>Settlement</h3>
+      <div class="price"><span>Approx. Weight</span><b>5.0 kg</b></div>
+      <div class="price"><span>Final Weight</span><b>4.8 kg</b></div>
+      <div class="price"><span>Final Value</span><b>₹984</b></div>
+      <div class="price"><span>Payment</span><span class="badge good">Confirmed</span></div>
+      <button class="btn secondary" onclick="alert('Digital receipt generated.')">Download Receipt</button>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="passport">
+  <div class="step-guide"><span>यह आपके Lot का Digital Record है।</span><button class="voice-btn" onclick="speak('यह Digital E-Waste Passport आपके Lot का रिकॉर्ड है। इसमें वजन, value और पूरी transaction history दिखाई देती है।')">🔊 सुनें</button></div>
+  <div class="grid2">
+    <div class="box">
+      <h3>Digital E-Waste Passport</h3>
+      <div style="display:flex;align-items:center;gap:18px;margin:15px 0"><div class="qr"></div><div><b>LOT-RCI-260929-00421</b><br><small>PCB</small><br><span class="badge good">Traceable</span></div></div>
+      <div class="price"><span>Initial Weight</span><b>5.0 kg</b></div><div class="price"><span>Final Weight</span><b>4.8 kg</b></div><div class="price"><span>Final Value</span><b>₹984</b></div><div class="price"><span>Payment</span><span class="badge good">Confirmed</span></div>
+    </div>
+    <div class="box">
+      <h3>Transaction Status</h3>
+      <div class="timeline">
+        <div class="event"><b>Lot Created</b><small>09:18</small></div>
+        <div class="event"><b>AI Classification</b><small>09:19</small></div>
+        <div class="event"><b>Recycler Selected</b><small>09:22</small></div>
+        <div class="event"><b>QR Handover</b><small>11:05</small></div>
+        <div class="event"><b>Payment Confirmed</b><small>11:08</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="ledger">
+  <div class="step-guide"><span>आपकी कमाई और payment status यहां देखें।</span><button class="voice-btn" onclick="speak('यहां आपकी कमाई, Lot और payment status दिखाई देता है।')">🔊 सुनें</button></div>
+  <div class="box"><h3>Earnings</h3><div class="tablewrap"><table><thead><tr><th>Lot ID</th><th>Material</th><th>Weight</th><th>Value</th><th>Status</th></tr></thead><tbody>
+  <tr><td>RCI-00421</td><td>PCB</td><td>4.8 kg</td><td>₹984</td><td><span class="badge good">Paid</span></td></tr>
+  <tr><td>RCI-00420</td><td>Copper Cable</td><td>6.2 kg</td><td>₹2,852</td><td><span class="badge good">Paid</span></td></tr>
+  <tr><td>RCI-00419</td><td>Mixed E-Waste</td><td>9.5 kg</td><td>₹760</td><td><span class="badge warn">Pending Sync</span></td></tr>
+  <tr><td>RCI-00418</td><td>Mobile Scrap</td><td>2.1 kg</td><td>₹672</td><td><span class="badge good">Paid</span></td></tr>
+  </tbody></table></div></div>
+</section>
+
+<section class="view" id="safety">
+  <div class="step-guide"><span>सुरक्षित तरीके से E-Waste संभालें।</span><button class="voice-btn" onclick="speak('तार न जलाएं, acid processing न करें। Damaged battery को सावधानी से संभालें और protective gear पहनें। Verified Recycler का उपयोग करें।')">🔊 सुनें</button></div>
+  <div class="safety">
+    <div class="box"><div class="big">🔥</div><b>Wire Burning</b><br><span class="badge danger">Avoid</span></div>
+    <div class="box"><div class="big">🧪</div><b>Acid Processing</b><br><span class="badge danger">Avoid</span></div>
+    <div class="box"><div class="big">🔋</div><b>Damaged Batteries</b><br><span class="badge warn">Handle Carefully</span></div>
+    <div class="box"><div class="big">🧤</div><b>Protective Gear</b><br><span class="badge good">Recommended</span></div>
+    <div class="box"><div class="big">♻️</div><b>Verified Recycler</b><br><span class="badge good">Preferred</span></div>
+  </div>
+  <div class="box" style="margin-top:16px"><button class="btn primary" onclick="alert('Voice safety guidance started.')">🔊 Play Voice Guidance</button></div>
+</section>
+
+<section class="view" id="analytics">
+  <div class="step-guide"><span>कमाई और collected material की रिपोर्ट देखें।</span><button class="voice-btn" onclick="speak('यहां आपकी monthly earnings, collected e-waste और material mix की रिपोर्ट दिखाई देती है।')">🔊 सुनें</button></div>
+  <div class="kpis"><div class="kpi"><small>Lots</small><strong>24</strong></div><div class="kpi"><small>Collected</small><strong>86.4 kg</strong></div><div class="kpi"><small>Average value</small><strong>₹216/kg</strong></div><div class="kpi"><small>Monthly earnings</small><strong>₹18,640</strong></div></div>
+  <div class="grid2">
+    <div class="box"><h3>Monthly Earnings</h3><div class="chart"><i class="chartbar" style="height:42%"><span>Apr</span></i><i class="chartbar" style="height:55%"><span>May</span></i><i class="chartbar" style="height:48%"><span>Jun</span></i><i class="chartbar" style="height:72%"><span>Jul</span></i><i class="chartbar" style="height:63%"><span>Aug</span></i><i class="chartbar" style="height:86%"><span>Sep</span></i></div></div>
+    <div class="box"><h3>Material Mix</h3><div class="price"><span>PCB</span><b>32%</b></div><div class="price"><span>Copper Cable</span><b>24%</b></div><div class="price"><span>Mixed E-Waste</span><b>21%</b></div><div class="price"><span>Computers</span><b>14%</b></div></div>
+  </div>
+</section>
+
+<section class="view" id="admin">
+  <div class="step-guide"><span>Admin: verification, transactions और flagged records.</span><button class="voice-btn" onclick="speak('Admin section में recycler verification, transactions और flagged records देखे जा सकते हैं।')">🔊 सुनें</button></div>
+  <div class="kpis"><div class="kpi"><small>Collectors</small><strong>2,846</strong></div><div class="kpi"><small>Verified Recyclers</small><strong>126</strong></div><div class="kpi"><small>Lots</small><strong>8,420</strong></div><div class="kpi"><small>E-Waste</small><strong>64.8 T</strong></div></div>
+  <div class="admin-grid">
+    <div class="box"><h3>Recycler Verification</h3><button class="btn primary" onclick="alert('Recycler verification queue opened.')">Open Queue</button></div>
+    <div class="box"><h3>Transactions</h3><button class="btn secondary" onclick="alert('Transaction monitor opened.')">Monitor</button></div>
+    <div class="box"><h3>Flagged Records</h3><span class="badge warn">7 Review</span><br><button class="btn light" style="margin-top:10px" onclick="alert('Flagged records opened.')">Review</button></div>
+  </div>
+</section>
+
+</div>
+</main>
+</div>
+
+
+<script>
+const titles={home:'Dashboard',collector:'Create E-Waste Lot',prices:'Price Board',recyclers:'Verified Recyclers',handover:'QR Handover',passport:'E-Waste Passport',ledger:'Earnings',safety:'Safety',analytics:'Analytics',admin:'Admin'};
+function show(id,btn){
+ document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+ const el=document.getElementById(id);if(el)el.classList.add('active');
+ document.querySelectorAll('.navbtn').forEach(v=>v.classList.remove('active'));
+ if(btn)btn.classList.add('active');
+ document.getElementById('pageTitle').textContent=(id==='home'?'शुरुआत / Dashboard':(titles[id]||'RecycLink India'));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function previewPhoto(e){
+ const f=e.target.files&&e.target.files[0];if(!f)return;
+ document.getElementById('photoImage').src=URL.createObjectURL(f);
+ document.getElementById('photoPreview').style.display='block';
+ document.getElementById('captureStatus').textContent='Photo captured: '+f.name;
+}
+function removePhoto(){
+ document.getElementById('photoInput').value='';
+ document.getElementById('photoPreview').style.display='none';
+ document.getElementById('photoImage').removeAttribute('src');
+ document.getElementById('captureStatus').textContent='No photo selected';
+}
+
+function changeAIClassification(){
+  const c=document.getElementById('aiCategory').value;
+  const mode=document.getElementById('classificationMode');
+  const badge=document.getElementById('classificationBadge');
+  const result=document.getElementById('classificationResult');
+  mode.textContent='Collector override • category changed manually';
+  badge.textContent='Manual Override';
+  badge.className='badge warn';
+  result.innerHTML='<b>Category changed to '+c+'</b><br>The selected category will be used for the value estimate and recycler matching.';
+  result.classList.add('show');
+  const mainCat=document.getElementById('cat');
+  if(mainCat) mainCat.value=c;
+  if(document.getElementById('wt')) estimate();
+}
+function confirmAIClassification(){
+  const c=document.getElementById('aiCategory').value;
+  const result=document.getElementById('classificationResult');
+  document.getElementById('classificationBadge').textContent='Confirmed';
+  document.getElementById('classificationBadge').className='badge good';
+  document.getElementById('classificationMode').textContent='Selected category confirmed';
+  result.innerHTML='<b>✓ '+c+' confirmed</b><br>This category is now locked for the current lot unless changed again.';
+  result.classList.add('show');
+  const mainCat=document.getElementById('cat');
+  if(mainCat) mainCat.value=c;
+  if(document.getElementById('wt')) estimate();
+}
+function resetAIClassification(){
+  const c=document.getElementById('cat').value || 'Printed Circuit Board';
+  document.getElementById('aiCategory').value=c;
+  document.getElementById('classificationMode').textContent='AI prediction • 91% confidence';
+  document.getElementById('classificationBadge').textContent='AI Detected';
+  document.getElementById('classificationBadge').className='badge good';
+  document.getElementById('classificationResult').classList.remove('show');
+}
+
+function estimate(){
+ const c=document.getElementById('cat').value,w=+document.getElementById('wt').value||0;
+ const ranges={'Printed Circuit Board':[180,220],'Copper Cable':[430,520],'Mobile Phone':[280,360],'Computer / Laptop':[70,110],'Mixed E-Waste':[65,95]};
+ const r=ranges[c]||[60,100],photo=document.getElementById('photoInput').files.length>0;
+ const e=document.getElementById('estimate');
+ document.getElementById('aiCategory').value=c;
+e.innerHTML='<b>Selected category: '+c+'</b><br>'+ (photo?'Photo captured • ':'')+
+ 'Estimated value: <strong>₹'+Math.round(r[0]*w).toLocaleString('en-IN')+' – ₹'+Math.round(r[1]*w).toLocaleString('en-IN')+
+ '</strong><br><span class="badge good">Classification ready</span> '+
+ '<button class="btn secondary" style="padding:6px 9px;margin-left:5px" onclick="show(\'recyclers\')">Find Recycler</button>';
+ e.classList.add('show');
+}
+function choose(name){
+ const e=document.getElementById('choose');
+ e.innerHTML='<b>'+name+'</b> selected <span class="badge good">Offer accepted</span><br><button class="btn primary" style="margin-top:8px" onclick="show(\'handover\')">Continue to Handover</button>';
+ e.classList.add('show');
+}
+function verifyHandover(){
+ const e=document.getElementById('handoverResult');
+ e.innerHTML='<b>✓ Handover Verified</b><br>Lot RCI-260929-00421 • Final weight 4.8 kg • ₹984<br><button class="btn secondary" style="margin-top:8px" onclick="show(\'passport\')">Open Passport</button>';
+ e.classList.add('show');
+}
+function searchLot(v){
+ if(v.trim().length>3) showToast('Lot खोज: '+v);
+}
+
+
+let currentSpeechText = 'नमस्ते! नया Lot बनाने के लिए शुरुआत करें.';
+let hindiAudio = null;
+
+function getHindiVoice(){
+  if(!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices() || [];
+  if(selectedLang==='en'){
+    return voices.find(v => /^en-IN/i.test(v.lang)) ||
+           voices.find(v => /^en(-|_)/i.test(v.lang)) || null;
+  }
+  return voices.find(v => /^hi(-|_)/i.test(v.lang)) ||
+         voices.find(v => /hindi/i.test(v.name)) || null;
+}
+
+function updateVoiceStatus(){
+  const v = getHindiVoice();
+  const status = document.getElementById('voiceStatus');
+  if(status) status.textContent = v ? '🟢 Hindi voice ready' : '🟡 Online Hindi voice fallback';
+}
+
+function clearSpeaking(){
+  document.querySelectorAll('.voice-btn').forEach(b=>b.classList.remove('speaking'));
+  updateVoiceStatus();
+}
+
+function onlineHindiTTS(text){
+  const status = document.getElementById('voiceStatus');
+  if(status) status.textContent = selectedLang==='en' ? '🔊 Playing English voice…' : '🔊 Playing Hindi voice…';
+
+  const chunks = text.match(/.{1,180}(?:\s|$)/g) || [text];
+  let i = 0;
+
+  function playNext(){
+    if(i >= chunks.length){ clearSpeaking(); return; }
+    const q = encodeURIComponent(chunks[i].trim());
+    const locale = selectedLang==='en' ? 'en-IN' : 'hi-IN';
+    const url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=' + locale + '&q=' + q;
+    hindiAudio = new Audio(url);
+    hindiAudio.volume = 1;
+    hindiAudio.onended = ()=>{ i++; playNext(); };
+    hindiAudio.onerror = ()=>{
+      clearSpeaking();
+      showToast('Hindi आवाज़ लोड नहीं हो सकी। इंटरनेट कनेक्शन जांचें।');
+    };
+    hindiAudio.play().catch(()=>{
+      clearSpeaking();
+      showToast('कृपया 🔊 सुनें फिर दबाएं। Browser ने audio रोक दिया था।');
+    });
+  }
+  playNext();
+}
+
+function speak(text){
+  currentSpeechText = text;
+  document.querySelectorAll('.voice-btn').forEach(b=>b.classList.add('speaking'));
+  try{ window.speechSynthesis.cancel(); }catch(e){}
+  if(hindiAudio){ try{ hindiAudio.pause(); hindiAudio.currentTime=0; }catch(e){} }
+
+  const voice = getHindiVoice();
+
+  if(voice){
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = selectedLang==='en' ? 'en-IN' : 'hi-IN';
+    u.voice = voice;
+    u.rate = 0.88;
+    u.pitch = 1;
+    u.volume = 1;
+    u.onend = clearSpeaking;
+    u.onerror = ()=>onlineHindiTTS(text);
+    window.speechSynthesis.speak(u);
+  } else {
+    onlineHindiTTS(text);
+  }
+}
+
+function stopVoice(){
+  try{ window.speechSynthesis.cancel(); }catch(e){}
+  if(hindiAudio){ try{ hindiAudio.pause(); hindiAudio.currentTime=0; }catch(e){} }
+  clearSpeaking();
+}
+
+function legacySpeakCurrentStep(){
+  const active=document.querySelector('.view.active');
+  const map={
+    home:'नमस्ते! पहला कदम है ई-वेस्ट का नया Lot बनाना। फिर भाव देखें, Recycler चुनें और QR से handover करें।',
+    collector:'ई-वेस्ट की फोटो लें। प्रकार और वजन भरें। फिर Analyze and Estimate दबाएं।',
+    prices:'अपने ई-वेस्ट के प्रकार का आज का अनुमानित भाव देखें।',
+    recyclers:'पास का Verified Recycler चुनें। दूरी और भाव देखें।',
+    handover:'QR दिखाएं और Verify Handover दबाएं। Handover सफल होने के बाद payment की जानकारी देखें।',
+    passport:'यह आपके Lot का Digital Record है।',
+    ledger:'यहां आपकी कमाई और payment status दिखाई देता है।',
+    safety:'तार न जलाएं। Acid processing न करें। Damaged battery को सावधानी से संभालें और protective gear पहनें।',
+    analytics:'यहां आपकी कमाई और collected e-waste की रिपोर्ट दिखाई देती है।',
+    admin:'Admin में verification, transactions और flagged records देखे जा सकते हैं।'
+  };
+  speak(map[active?.id] || currentSpeechText);
+}
+
+if('speechSynthesis' in window){
+  window.speechSynthesis.onvoiceschanged = updateVoiceStatus;
+  setTimeout(updateVoiceStatus, 500);
+}
+
+
+
+
+let selectedLang='hi', currentFlow=0, selectedRecycler=null;
+const prices={'Printed Circuit Board':[180,220],'Copper Cable':[430,520],'Mobile Phone':[280,360],'Computer / Laptop':[70,110],'Mixed E-Waste':[65,95]};
+
+const i18n={
+ hi:{
+  brand:'ई-वेस्ट collection made simple',welcome:'नमस्ते',homeTitle:'आज क्या करना है?',homeSub:'हम आपको एक-एक कदम करके पूरा काम करवाएंगे।',
+  nextTitle:'1. E-Waste की फोटो लें',nextSub:'फोटो, प्रकार और वजन भरें।',nextBtn:'शुरू करें →',listen:'सुनें',
+  phoneTitle:'मोबाइल नंबर डालें',phoneSub:'सिर्फ मोबाइल नंबर चाहिए। कोई लंबा form नहीं।',phoneVoice:'अपना मोबाइल नंबर डालें। फिर OTP भेजें।',
+  otpTitle:'OTP डालें',otpSub:'आपके मोबाइल पर भेजे गए 6 अंकों का OTP डालें।',otpVoice:'OTP के छह अंक डालें।',
+  profileTitle:'आपका नाम',profileSub:'बस अपना नाम डालें ताकि Lot और payment records आपके नाम से दिखें।',profileVoice:'अपना नाम डालें।'
+ },
+ en:{
+  brand:'Simple e-waste collection',welcome:'Hello',homeTitle:'What do you want to do?',homeSub:'We will guide you one step at a time.',
+  nextTitle:'1. Take an e-waste photo',nextSub:'Add photo, type and weight.',nextBtn:'Start →',listen:'Listen',
+  phoneTitle:'Enter mobile number',phoneSub:'Only your mobile number is needed. No long form.',phoneVoice:'Enter your mobile number, then send the OTP.',
+  otpTitle:'Enter OTP',otpSub:'Enter the 6-digit OTP sent to your mobile.',otpVoice:'Enter the six OTP digits.',
+  profileTitle:'Your name',profileSub:'Enter your name so your lot and payment records are easy to identify.',profileVoice:'Enter your name.'
+ }
+};
+
+function setText(id,val){const e=document.getElementById(id);if(e)e.textContent=val;}
+function selectLanguage(lang){
+  selectedLang=lang;
+  const t=i18n[lang];
+  setText('authBrandSub',t.brand); setText('phoneTitle',t.phoneTitle); setText('phoneSub',t.phoneSub);
+  setText('phoneVoiceText',t.phoneVoice); setText('otpTitle',t.otpTitle); setText('otpSub',t.otpSub); setText('otpVoiceText',t.otpVoice);
+  setText('profileTitle',t.profileTitle); setText('profileSub',t.profileSub); setText('profileVoiceText',t.profileVoice);
+  document.getElementById('langStep').classList.remove('active');
+  document.getElementById('phoneStep').classList.add('active');
+  applyFullFlowLanguage();
+  speak(lang==='hi'?'आपने हिन्दी चुनी है। अब अपना मोबाइल नंबर डालें।':'You selected English. Now enter your mobile number.');
+}
+function authStep(id){
+  document.querySelectorAll('.auth-step').forEach(x=>x.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function sendOTP(){
+  const n=(document.getElementById('phoneNumber').value||'').replace(/\D/g,'');
+  if(n.length!==10){showToast(selectedLang==='hi'?'कृपया 10 अंकों का मोबाइल नंबर डालें।':'Please enter a 10-digit mobile number.');return;}
+  authStep('otpStep');
+  speak(selectedLang==='hi'?'आपके नंबर पर OTP भेज दिया गया है। छह अंक डालें।':'An OTP has been sent. Enter the six digits.');
+}
+function verifyOTP(){
+  const inputs=[...document.querySelectorAll('.otp-row input')];
+  const code=inputs.map(x=>x.value).join('');
+  if(code!=='123456'){showToast(selectedLang==='hi'?'OTP गलत है। Demo में 123456 डालें।':'Incorrect OTP. Use 123456 in this demo.');return;}
+  authStep('profileStep');
+  speak(selectedLang==='hi'?'OTP सही है। अब अपना नाम डालें।':'OTP verified. Now enter your name.');
+}
+
+function applyLanguageToFlow(){
+  const en=selectedLang==='en';
+  setText('homeTitle',en?'What do you want to do?':'आज क्या करना है?');
+  setText('homeSub',en?'We will guide you one step at a time.':'हम आपको एक-एक कदम करके पूरा काम करवाएंगे।');
+  setText('nextTitle',en?'1. Take an e-waste photo':'1. E-Waste की फोटो लें');
+  setText('nextSub',en?'Add photo, type and weight.':'फोटो, प्रकार और वजन भरें।');
+  setText('nextBtn',en?'Start →':'शुरू करें →');
+  setText('listenLabel',en?'Listen':'सुनें');
+}
+
+
+function applyFullFlowLanguage(){
+  const en=selectedLang==='en';
+  const q=(sel,hi,enText)=>{document.querySelectorAll(sel).forEach(e=>e.textContent=en?enText:hi)};
+  q('#flowStep1 .voice-strip b','Step 1','Step 1');
+  q('#flowStep1 .voice-strip .voice-btn','सुनें','Listen');
+  q('#flowStep1 .flow-question','ई-वेस्ट की फोटो लें','Take an e-waste photo');
+  q('#flowStep1 .flow-sub','पहले फोटो, फिर प्रकार और वजन। बस इतना ही।','First take the photo, then add type and weight.');
+  q('#flowStep1 .big-action','📷 फोटो लें','📷 Take photo');
+  q('#flowStep1 .flow-footer .light','← वापस','← Back');
+  q('#flowStep1 .flow-footer .primary','आगे →','Next →');
+
+  q('#flowStep2 .voice-strip b','Step 2','Step 2');
+  q('#flowStep2 .voice-strip .voice-btn','सुनें','Listen');
+  q('#flowStep2 .flow-question','AI से फोटो जांचें','Check the photo with AI');
+  q('#flowStep2 .flow-sub','यह एक simple AI-assisted estimate है। कम confidence होने पर आप category बदल सकते हैं।','This is a simple AI-assisted estimate. You can change the category if confidence is low.');
+  q('#flowStep2 .flow-footer .light','← वापस','← Back');
+  q('#flowStep2 .flow-footer .primary','Recycler चुनें →','Choose recycler →');
+
+  q('#flowStep3 .voice-strip b','Step 3','Step 3');
+  q('#flowStep3 .voice-strip .voice-btn','सुनें','Listen');
+  q('#flowStep3 .flow-question','कौन सा Recycler चुनना है?','Which recycler do you want to choose?');
+  q('#flowStep3 .flow-sub','हमने विकल्प सरल रखे हैं: दूरी और भाव देखें।','We kept it simple: compare distance and price.');
+  q('#flowStep3 .flow-footer .light','← वापस','← Back');
+  q('#flowStep3 .flow-footer .primary','Handover →','Handover →');
+
+  q('#flowStep4 .voice-strip b','Step 4','Step 4');
+  q('#flowStep4 .voice-strip .voice-btn','सुनें','Listen');
+  q('#flowStep4 .flow-question','Handover और Payment','Handover & Payment');
+  q('#flowStep4 .flow-sub','पहले Lot verify करें। फिर payment का तरीका चुनें।','Verify the lot first, then choose a payment method.');
+  q('#flowStep4 .flow-footer .light','← वापस','← Back');
+  q('#flowStep4 .flow-footer .primary','रिकॉर्ड देखें →','View record →');
+
+  q('#flowStep5 .voice-strip b','Step 5','Step 5');
+  q('#flowStep5 .voice-strip .voice-btn','सुनें','Listen');
+  q('#flowStep5 .flow-question','काम पूरा हुआ ✓','Work completed ✓');
+  q('#flowStep5 .flow-sub','आपका Digital E-Waste Passport यहां है।','Your Digital E-Waste Passport is ready.');
+  q('#flowStep5 .flow-footer .light','⌂ शुरुआत','⌂ Home');
+  q('#flowStep5 .flow-footer .secondary','＋ नया Lot','＋ New Lot');
+
+  q('#flowStep4 .payment-card div:first-child','FINAL SETTLEMENT','FINAL SETTLEMENT');
+  q('#flowStep4 .pay-methods + *','Payment method','Payment method');
+}
+
+function finishRegistration(){
+  const name=(document.getElementById('collectorName').value||'').trim();
+  if(!name){showToast(selectedLang==='hi'?'अपना नाम डालें।':'Please enter your name.');return;}
+  document.getElementById('authShell').classList.remove('show');
+  document.getElementById('appShell').classList.add('show');
+  setText('flowWelcome',(selectedLang==='hi'?'नमस्ते, ':'Hello, ')+name);
+  setText('homeGreeting',selectedLang==='hi'?'नमस्ते, '+name:'Hello, '+name);
+  setText('listenLabel',i18n[selectedLang].listen);
+  applyLanguageToFlow();
+  applyFullFlowLanguage();
+  // Voice is user-triggered only; never delay page navigation with TTS.
+}
+function logout(){
+  stopVoice();
+  document.getElementById('appShell').classList.remove('show');
+  document.getElementById('authShell').classList.add('show');
+  authStep('langStep');
+}
+function goFlow(n){
+  currentFlow=n;
+  document.querySelectorAll('.step-view').forEach(x=>x.classList.remove('active'));
+  const target=n===0?'flowHome':'flowStep'+n;
+  const el=document.getElementById(target);
+  if(!el) return;
+  el.classList.add('active');
+  window.scrollTo(0,0);
+  if(n===2) updateFlowPrice();
+}
+function completeStep1(){
+  const cat=document.getElementById('flowCat').value;
+  const wt=+document.getElementById('flowWt').value||0;
+  if(wt<=0){showToast(selectedLang==='hi'?'कृपया वजन डालें।':'Please enter the weight.');return;}
+  document.getElementById('cat').value=cat;
+  document.getElementById('wt').value=wt;
+  const input=document.getElementById('photoInput');
+  if(input.files.length) document.getElementById('flowPhotoStatus').textContent='✓ '+input.files[0].name;
+  document.getElementById('flowLotMaterial').textContent=cat;
+  goFlow(2);
+}
+function updateFlowPrice(){
+  const cat=document.getElementById('flowCat').value;
+  const r=prices[cat]||[60,100];
+  setText('flowPriceMaterial',cat); setText('flowPrice','₹'+r[0]+'–'+r[1]+'/kg');
+}
+function selectFlowRecycler(name,rate){
+  selectedRecycler={name,rate};
+  const box=document.getElementById('flowRecyclerSelected');
+  box.innerHTML='<b>'+name+'</b><br><span class="badge good">Selected • ₹'+rate+'/kg</span>';
+  box.classList.add('show');
+  document.getElementById('flowRecyclerNext').disabled=false;
+  // Selection is immediate; user may press Listen if guidance is needed.
+}
+function verifyFlowHandover(){
+  const box=document.getElementById('flowHandoverResult');
+  box.innerHTML='<b>✓ Handover Verified</b><br>Final weight 4.8 kg • ₹984<br><span class="badge good">Payment Confirmed</span>';
+  box.classList.add('show');
+  document.getElementById('flowPassportBtn').disabled=false;
+  // Handover confirmation is immediate; voice remains user-triggered.
+}
+function showToast(msg){
+  const t=document.getElementById('toast'); if(!t)return;
+  t.textContent=msg; t.classList.add('show'); clearTimeout(window._toast);
+  window._toast=setTimeout(()=>t.classList.remove('show'),3000);
+}
+function speakCurrentAuth(){
+  const active=document.querySelector('.auth-step.active');
+  const map={phoneStep:document.getElementById('phoneVoiceText')?.textContent,otpStep:document.getElementById('otpVoiceText')?.textContent,profileStep:document.getElementById('profileVoiceText')?.textContent,langStep:'भाषा चुनें। हिन्दी या English में से एक चुनें।'};
+  speak(map[active?.id]||'कृपया अगला कदम पूरा करें।');
+}
+function speakCurrentStep(){
+  const map={0:'आज क्या करना है? नया E-Waste Lot बनाने के लिए शुरू करें।',1:'पहला कदम। E-Waste की फोटो लें, प्रकार चुनें और वजन डालें।',2:'दूसरा कदम। आज का अनुमानित भाव देखें।',3:'तीसरा कदम। Verified Recycler चुनें।',4:'चौथा कदम। QR दिखाएं और Handover verify करें।',5:'पांचवां कदम। आपका Digital E-Waste Passport तैयार है।'};
+  speak(map[currentFlow]||map[0]);
+}
+
+document.addEventListener('change',e=>{
+  if(e.target && e.target.id==='flowCat') updateFlowPrice();
+});
+document.addEventListener('DOMContentLoaded',()=>{
+  const input=document.getElementById('photoInput');
+  if(input){
+    input.addEventListener('change',()=>{
+      if(input.files[0]) document.getElementById('flowPhotoStatus').textContent='✓ '+input.files[0].name;
+    });
+  }
+  // Auto-advance OTP boxes.
+  document.querySelectorAll('.otp-row input').forEach((el,i,arr)=>{
+    el.addEventListener('input',()=>{if(el.value && arr[i+1])arr[i+1].focus();});
+  });
+});
+
+
+function voiceGuide(hi,en){
+  speak(selectedLang==='hi'?hi:en);
+}
+
+let aiModel=null, aiModelLoading=false;
+
+function loadScript(src){
+  return new Promise((resolve,reject)=>{
+    const sc=document.createElement('script');
+    sc.src=src; sc.async=true; sc.onload=resolve; sc.onerror=reject;
+    document.head.appendChild(sc);
+  });
+}
+async function loadEWasteAI(){
+  if(aiModel)return aiModel;
+  if(aiModelLoading)return null;
+  aiModelLoading=true;
+  try{
+    await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js');
+    await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd');
+    aiModel=await cocoSsd.load();
+    return aiModel;
+  }catch(e){return null}
+  finally{aiModelLoading=false}
+}
+function localVisualHeuristic(img){
+  const c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});
+  c.width=160;c.height=120;ctx.drawImage(img,0,0,160,120);
+  const d=ctx.getImageData(0,0,160,120).data;
+  let dark=0,bright=0,edge=0,total=0;
+  for(let y=1;y<120;y++)for(let x=1;x<160;x++){
+    const p=(y*160+x)*4,q=((y-1)*160+x)*4;
+    const a=.2126*d[p]+.7152*d[p+1]+.0722*d[p+2];
+    const b=.2126*d[q]+.7152*d[q+1]+.0722*d[q+2];
+    if(a<70)dark++; if(a>210)bright++; if(Math.abs(a-b)>55)edge++; total++;
+  }
+  const dr=dark/total,er=edge/total,br=bright/total;
+  if(er>.18&&dr>.20)return {category:'Printed Circuit Board',confidence:67,reason:'Dense component/edge pattern detected'};
+  if(er<.10&&br>.48)return {category:'Mobile Phone',confidence:61,reason:'Compact smooth rectangular pattern detected'};
+  return {category:'Mixed E-Waste',confidence:55,reason:'Photo does not contain enough specific visual evidence'};
+}
+async function analyzePhotoAI(){
+  const file=document.getElementById('photoInput')?.files?.[0];
+  if(!file){showToast(selectedLang==='hi'?'पहले फोटो लें।':'Take a photo first.');return}
+  const img=new Image();
+  img.onload=async()=>{
+    const box=document.getElementById('aiResult');
+    box.innerHTML='<div class="small-note">🧠 '+(selectedLang==='hi'?'AI फोटो जांच रहा है…':'AI is checking the photo…')+'</div>';
+    box.classList.add('show');
+    let best=null,model=await loadEWasteAI();
+    if(model){
+      try{
+        const preds=await model.detect(img);
+        const map={'cell phone':'Mobile Phone','laptop':'Computer / Laptop','keyboard':'Computer / Laptop','monitor':'Computer / Laptop','tv':'Computer / Laptop'};
+        for(const p of preds){
+          if(map[p.class]){best={category:map[p.class],confidence:Math.round(p.score*100),reason:'Object detected in uploaded photo'};break}
+        }
+      }catch(e){}
+    }
+    if(!best)best=localVisualHeuristic(img);
+    showAIResult(best);
+    URL.revokeObjectURL(img.src);
+  };
+  img.src=URL.createObjectURL(file);
+}
+function showAIResult(r){
+  const partial=r.confidence<80, hindi=selectedLang==='hi';
+  document.getElementById('aiResult').innerHTML=
+  '<div class="ai-panel">'+
+  '<div class="ai-head"><div><b>🧠 '+(hindi?'AI-assisted visual check':'AI-assisted visual check')+'</b><div class="small-note">'+(hindi?'फोटो के आधार पर अनुमान':'Estimate based on the photo')+'</div></div><div class="ai-score">'+r.confidence+'%</div></div>'+
+  '<div class="ai-meter"><i style="width:'+r.confidence+'%"></i></div>'+
+  '<h3 style="margin:8px 0">'+r.category+'</h3>'+
+  '<div class="small-note">'+r.reason+'</div>'+
+  '<div class="ai-feasibility"><div class="ai-chip"><b>'+ (partial?(hindi?'Partial feasibility':'Partial feasibility'):(hindi?'Good visual match':'Good visual match')) +'</b><span>'+ (partial?(hindi?'फोटो से पक्का निर्णय नहीं हो सकता। Category confirm करें।':'The photo is not sufficient for a high-confidence decision. Please confirm.'):(hindi?'फोटो में उपयोगी visual evidence मिला।':'Useful visual evidence was found in the photo.')) +'</span></div><div class="ai-chip"><b>♻ Recycling path</b><span>'+(r.category==='Printed Circuit Board'?(hindi?'PCB recovery stream':'PCB recovery stream'):(hindi?'Verified e-waste recycler':'Verified e-waste recycler'))+'</span></div></div>'+
+  '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:13px"><button class="btn primary" onclick="acceptAIResult(\''+r.category.replace(/'/g,"\\'")+'\')">✓ '+(hindi?'Use this':'Use this')+'</button><button class="btn light" onclick="goFlow(1)">'+(hindi?'फिर से फोटो':'Retake photo')+'</button></div></div>';
+  document.getElementById('aiResult').classList.add('show');
+}
+function acceptAIResult(cat){
+  document.getElementById('flowCat').value=cat;
+  document.getElementById('cat').value=cat;
+  updateFlowPrice();
+  document.getElementById('flowPriceMaterial').textContent=cat;
+}
+let selectedPayment='UPI';
+function selectPayment(btn,method){
+  document.querySelectorAll('.pay-method').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');selectedPayment=method;
+  setText('paymentMethodText',method);
+}
+function confirmPayment(){
+  const d=document.getElementById('paymentDone');
+  d.innerHTML='<b>✓ '+(selectedLang==='hi'?'Payment Confirmed':'Payment Confirmed')+'</b><br>₹984 • '+selectedPayment+' • Transaction ID RCI26092998421';
+  d.classList.add('show');
+  document.getElementById('flowPassportBtn').disabled=false;
+}
+</script></body></html>
